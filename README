@@ -1,0 +1,11 @@
+VDesk v1.0 (https://vdesk.beachmont.xyz)
+
+VDesk is an open source auton editor for Vex v5 bots. The desktop application called "vdesk-desktop" is written in java and runs on Linux, Windows, and MacOS.
+The vdesk playback and recording software for the brain called "vdesk-firmware" can be installed and used in any PROS project.
+
+-- Recording --
+
+Inside VDesk assure the brain is connected by using `Brain -> Connection information`, then use the `Brain -> Record to VDK` menu item to record input from the driver.
+Use the `Brain -> Stop recording` menu item to stop recording and save the inputs to a `.vdk` file
+
+More information to come soon.
