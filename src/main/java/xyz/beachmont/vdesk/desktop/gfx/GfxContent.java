@@ -31,4 +31,17 @@ public class GfxContent {
     // Reset color
     this.graphics.setColor(oldColor);
   }
+
+  /**
+   * Draw a circle
+   * @param color Color of the circle
+   * @param x X position of the center
+   * @param y Y position of the center
+   * @param size W & H of the circle
+   */
+  public void drawCircle(Color color, int x, int y, int size) {
+    this.graphics.setColor(color);
+
+    this.graphics.fillOval(x-(size/2), y-(size/2), size, size);
+  }
 }

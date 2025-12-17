@@ -113,7 +113,7 @@ public class VDeskApplication extends JFrame {
     setContentPane(core);
   }
 
-  class VDeskCore extends JPanel implements MouseListener {
+  class VDeskCore extends JPanel {
     private VDKEditor editor;
     private VDKRenderer renderer;
 
@@ -121,8 +121,8 @@ public class VDeskApplication extends JFrame {
       this.editor = editor;
       this.renderer = new VDKRenderer(this.editor);
 
-      this.addMouseListener(this);
       this.addKeyListener(editor);
+      this.addMouseListener(editor);
 
       System.out.println("VDeskCore init");
     }
@@ -142,26 +142,6 @@ public class VDeskApplication extends JFrame {
       }
 
       this.repaint(); // Request screen to be redrawn
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
     }
 
   };

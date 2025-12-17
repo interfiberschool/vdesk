@@ -2,17 +2,24 @@ package xyz.beachmont.vdesk.desktop;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import xyz.beachmont.vdesk.desktop.editor.EditorTool;
+import xyz.beachmont.vdesk.desktop.format.VDKPoint;
+import xyz.beachmont.vdesk.desktop.format.VDeskFormat;
 
 /**
  * Handles all editor operations
  */
-public class VDKEditor implements KeyListener {
+public class VDKEditor implements KeyListener, MouseListener {
   public VDKEditor() {
     this.tools = new ArrayList<>();
     this.toolKeys = new ArrayList<>();
+
+    this.activeFile = new VDeskFormat();
+    this.activeFile.points.add(new VDKPoint("Hello World", -5, -5));
   }
 
   private ArrayList<EditorTool> tools;
@@ -20,6 +27,7 @@ public class VDKEditor implements KeyListener {
   /// @brief  List of keys registered to the current EditorTool object
   private ArrayList<Integer> toolKeys;
   public EditorTool activeTool = null;
+  public VDeskFormat activeFile = null;
 
   /// Returns the list of avalible editor tools
   public ArrayList<EditorTool> getTools() {
@@ -73,5 +81,28 @@ public class VDKEditor implements KeyListener {
   @Override
   public void keyTyped(KeyEvent e) {
     if (this.activeTool == null) return;
+  }
+
+  @Override
+  public void mouseClicked(MouseEvent e) {
+  }
+
+  @Override
+  public void mouseEntered(MouseEvent e) {
+  }
+
+  @Override
+  public void mouseExited(MouseEvent e) {
+  }
+
+  @Override
+  public void mousePressed(MouseEvent e) {
+    if (this.activeTool == null) return;
+
+    this.activeTool.mouseClicked(this, e);
+  }
+
+  @Override
+  public void mouseReleased(MouseEvent e) {
   }
 }
