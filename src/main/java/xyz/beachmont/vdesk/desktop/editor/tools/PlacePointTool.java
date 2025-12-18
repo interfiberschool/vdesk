@@ -33,6 +33,8 @@ public class PlacePointTool extends EditorTool {
 
   @Override
   public void mouseClicked(VDKEditor editor, MouseEvent e) {
+    if (e.getButton() != MouseEvent.BUTTON1) return; // Left click only
+
     if (editor.activeFile == null) {
       JOptionPane.showMessageDialog(null, "You can only place points when a file is loaded", this.name + " tool", JOptionPane.ERROR_MESSAGE);
 
@@ -41,6 +43,10 @@ public class PlacePointTool extends EditorTool {
 
     VDKPoint p = new VDKPoint("New point", e.getX(), e.getY());
     editor.activeFile.points.add(p);
+  }
+
+  @Override
+  public void mouseMoved(VDKEditor editor, MouseEvent e) {
   }
 
 }

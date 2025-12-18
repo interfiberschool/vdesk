@@ -28,4 +28,7 @@ public abstract class EditorTool {
 
   /// @brief  Called when the mouse is clicked while this tool is active
   public abstract void mouseClicked(VDKEditor editor, MouseEvent e);
+
+  /// @brief  Called when the mouse is moved
+  public abstract void mouseMoved(VDKEditor editor, MouseEvent e);
 }

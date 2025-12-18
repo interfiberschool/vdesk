@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import xyz.beachmont.vdesk.desktop.VDKEditor;
+import xyz.beachmont.vdesk.desktop.format.VDKBoundingBox;
 import xyz.beachmont.vdesk.desktop.format.VDKPoint;
 
 /**
@@ -22,9 +23,20 @@ public class VDKRenderer implements IRenderer {
 
     if (editor.activeFile == null) return; // Skip when no file is loaded
 
+    if (editor.activeTool != null) {
+      editor.activeTool.whileActive(this.editor, c);
+    }
+
     // Render points first
     for (VDKPoint p : editor.activeFile.points) {
       c.drawCircle(Color.YELLOW, (int) p.x, (int) p.y, 10);
+      c.drawText(p.pointName, (int) p.x, (int) p.y);
+    }
+
+    // Then bounding boxes
+    for (VDKBoundingBox bb : editor.activeFile.boxes) {
+      c.setColor(Color.YELLOW);
+      c.drawBox(bb.xPos, bb.yPos, bb.xCorner, bb.yCorner);
     }
   }
 }

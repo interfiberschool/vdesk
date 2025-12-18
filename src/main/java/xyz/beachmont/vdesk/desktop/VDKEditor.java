@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import xyz.beachmont.vdesk.desktop.editor.EditorTool;
@@ -13,7 +14,7 @@ import xyz.beachmont.vdesk.desktop.format.VDeskFormat;
 /**
  * Handles all editor operations
  */
-public class VDKEditor implements KeyListener, MouseListener {
+public class VDKEditor implements KeyListener, MouseListener, MouseMotionListener {
   public VDKEditor() {
     this.tools = new ArrayList<>();
     this.toolKeys = new ArrayList<>();
@@ -104,5 +105,19 @@ public class VDKEditor implements KeyListener, MouseListener {
 
   @Override
   public void mouseReleased(MouseEvent e) {
+    if (this.activeTool == null) return;
+
+    this.activeTool.mouseMoved(this, e);
+  }
+
+  @Override
+  public void mouseMoved(MouseEvent e) {
+    if (this.activeTool == null) return;
+
+    this.activeTool.mouseMoved(this, e);
+  }
+
+  @Override
+  public void mouseDragged(MouseEvent e) {
   }
 }

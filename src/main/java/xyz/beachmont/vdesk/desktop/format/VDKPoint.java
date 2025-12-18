@@ -1,8 +1,6 @@
 package xyz.beachmont.vdesk.desktop.format;
 
-import java.io.Serializable;
-
-public class VDKPoint implements Serializable { 
+public class VDKPoint { 
   public VDKPoint(String name, float x, float y) {
     this.pointName = name;
 

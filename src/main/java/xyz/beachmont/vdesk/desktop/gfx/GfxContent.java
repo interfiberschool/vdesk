@@ -44,4 +44,35 @@ public class GfxContent {
 
     this.graphics.fillOval(x-(size/2), y-(size/2), size, size);
   }
+
+  /**
+   * Draw centered text
+   * @param text Text to draw
+   * @param x Base x coordinate
+   * @param y Base y coordinate, font height is added
+   */
+  public void drawText(String text, int x, int y) {
+    int fWidth = this.graphics.getFontMetrics().stringWidth(text);
+
+    this.graphics.drawString(text, x-(fWidth/2), y + this.graphics.getFontMetrics().getHeight());
+  }
+
+  /**
+   * Draw a 2D box
+   * @param x1 Origin of the box (x)
+   * @param y1 Origin of the box (y)
+   * @param x2 Corner of the box (x)
+   * @param y2 Corner of the box (y)
+   */
+  public void drawBox(int x1, int y1, int x2, int y2) {
+    this.graphics.fillRect(x1, y1, x2-x1, y2-y1);
+  }
+
+  /**
+   * Override the draw color for methods which do not support it
+   * @param color Overriding color
+   */
+  public void setColor(Color color) {
+    this.graphics.setColor(color);
+  }
 }

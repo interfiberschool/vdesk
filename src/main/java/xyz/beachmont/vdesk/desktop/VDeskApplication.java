@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.Graphics;
+import java.awt.Desktop.Action;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -51,9 +52,17 @@ public class VDeskApplication extends JFrame {
 
     JMenuItem createVdk = new JMenuItem("Create .vdk file");
 
+    JMenuItem saveVdk = new JMenuItem("Save .vdk file");
+    saveVdk.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.out.println(editor.activeFile.save());
+      }
+    });
+
     file.add(createVdk);
     file.add("Open .vdk file");
-    file.add("Save .vdk file");
+    file.add(saveVdk);
     file.add("Save .vdk file as");
 
     JMenu edit = new JMenu("Edit");
@@ -71,19 +80,51 @@ public class VDeskApplication extends JFrame {
 
       tools.add(activateTool);
     }
-    
+
     JMenu field = new JMenu("Field");
-    field.add("Set field type");
-    field.add("Set constraints");
+    field.add("Set active game");
+
+    JMenuItem setSize = new JMenuItem("Set field size");
+    setSize.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (editor.activeFile == null) {
+          JOptionPane.showMessageDialog(null, "Field size can only be set when a vdk is loaded", "VDesk",
+              JOptionPane.ERROR_MESSAGE);
+
+          return;
+        }
+
+        Object[] choices = { "Generic V5 field", "Generic IQ field" };
+
+        int result = JOptionPane.showOptionDialog(null, "Select a .vdk field configuration", "VDesk", JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
+
+        System.out.print(result);
+        if (result == 0) {
+          editor.activeFile.field.setForV5();
+
+          JOptionPane.showMessageDialog(null, "Field size set to 'Generic V5 field'", "VDesk",
+              JOptionPane.INFORMATION_MESSAGE);
+        } else if (result == 1) {
+          editor.activeFile.field.setForIQ();
+
+          JOptionPane.showMessageDialog(null, "Field size set to 'Generic IQ field'", "VDesk",
+              JOptionPane.INFORMATION_MESSAGE);
+        }
+      }
+    });
+
+    field.add(setSize);
 
     JMenuItem setAlliance = new JMenuItem("Set alliance mode");
-
     setAlliance.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         Object[] choices = { "Red", "Blue", "Generic" };
 
-        JOptionPane.showOptionDialog(null, "Select .vdk alliance mode", "VDesk", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
+        JOptionPane.showOptionDialog(null, "Select .vdk alliance mode", "VDesk", JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
       }
     });
 
@@ -95,7 +136,8 @@ public class VDeskApplication extends JFrame {
     about.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(null, Config.version + "\n" + Config.copyright + "\n" + Config.extraInfo, "About VDesk", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, Config.version + "\n" + Config.copyright + "\n" + Config.extraInfo,
+            "About VDesk", JOptionPane.INFORMATION_MESSAGE);
       }
     });
 
@@ -123,6 +165,7 @@ public class VDeskApplication extends JFrame {
 
       this.addKeyListener(editor);
       this.addMouseListener(editor);
+      this.addMouseMotionListener(editor);
 
       System.out.println("VDeskCore init");
     }
@@ -136,7 +179,7 @@ public class VDeskApplication extends JFrame {
       this.renderer.render(content);
 
       try {
-        Thread.sleep(1/60); // Sleep to obtain frame rate (kinda a hack)
+        Thread.sleep(1 / 60); // Sleep to obtain frame rate (kinda a hack)
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
