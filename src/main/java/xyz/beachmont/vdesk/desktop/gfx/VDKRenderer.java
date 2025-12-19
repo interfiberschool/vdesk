@@ -1,11 +1,8 @@
 package xyz.beachmont.vdesk.desktop.gfx;
 
 import java.awt.Color;
-import java.awt.Graphics;
-
 import xyz.beachmont.vdesk.desktop.VDKEditor;
-import xyz.beachmont.vdesk.desktop.format.VDKBoundingBox;
-import xyz.beachmont.vdesk.desktop.format.VDKPoint;
+import xyz.beachmont.vdesk.desktop.format.VDKObject;
 
 /**
  * Renders .vdk files to a graphics context
@@ -27,16 +24,8 @@ public class VDKRenderer implements IRenderer {
       editor.activeTool.whileActive(this.editor, c);
     }
 
-    // Render points first
-    for (VDKPoint p : editor.activeFile.points) {
-      c.drawCircle(Color.WHITE, (int) p.x, (int) p.y, 10);
-      c.drawText(p.pointName, (int) p.x, (int) p.y);
-    }
-
-    // Then bounding boxes
-    for (VDKBoundingBox bb : editor.activeFile.boxes) {
-      c.setColor(Color.CYAN);
-      c.drawBox(bb.xPos, bb.yPos, bb.xCorner, bb.yCorner);
+    for (VDKObject p : editor.activeFile.objects) {
+      p.render(c);
     }
   }
 }

@@ -2,7 +2,6 @@ package xyz.beachmont.vdesk.desktop.gfx;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Polygon;
 
 /**
  * Main graphics content renderer

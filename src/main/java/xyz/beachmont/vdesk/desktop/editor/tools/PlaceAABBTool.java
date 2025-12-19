@@ -64,7 +64,7 @@ public class PlaceAABBTool extends EditorTool {
       aabb.xCorner = this.cornerX;
       aabb.yCorner = this.cornerY;
 
-      editor.activeFile.boxes.add(aabb);
+      editor.activeFile.objects.add(aabb);
     }
   }
 

@@ -42,7 +42,7 @@ public class PlacePointTool extends EditorTool {
     }
 
     VDKPoint p = new VDKPoint("New point", e.getX(), e.getY());
-    editor.activeFile.points.add(p);
+    editor.activeFile.objects.add(p);
   }
 
   @Override

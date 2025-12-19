@@ -1,5 +1,7 @@
 package xyz.beachmont.vdesk.desktop.format;
 
+import xyz.beachmont.vdesk.desktop.gfx.GfxContent;
+
 /**
  * Base object class for objects within a VDK file
  */
@@ -22,4 +24,10 @@ public abstract class VDKObject {
   public int yPos;
 
   public abstract String getObjectState();
+
+  /**
+   * Render this object in the scene
+   * @param content Content renderer
+   */
+  public abstract void render(GfxContent content);
 }

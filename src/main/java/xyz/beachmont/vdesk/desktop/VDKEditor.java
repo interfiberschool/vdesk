@@ -20,7 +20,7 @@ public class VDKEditor implements KeyListener, MouseListener, MouseMotionListene
     this.toolKeys = new ArrayList<>();
 
     this.activeFile = new VDeskFormat();
-    this.activeFile.points.add(new VDKPoint("Hello World", -5, -5));
+    this.activeFile.objects.add(new VDKPoint("Hello World", -5, -5));
   }
 
   private ArrayList<EditorTool> tools;

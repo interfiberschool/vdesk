@@ -8,8 +8,7 @@ import java.util.ArrayList;
  */
 public class VDeskFormat implements Serializable {
   public VDeskFormat()  {
-    this.points = new ArrayList<>();
-    this.boxes = new ArrayList<>();
+    this.objects = new ArrayList<>();
     this.alliance = Alliance.Blue;
     this.field = new VDKFieldParameters();
   }
@@ -17,11 +16,8 @@ public class VDeskFormat implements Serializable {
   /// @brief  VDesk version number
   public static int VDESK_VERSION = 2;
 
-  /// @brief  Points of interest
-  public ArrayList<VDKPoint> points;
-
-  /// @brierf  Bounding boxes
-  public ArrayList<VDKBoundingBox> boxes;
+  /// @brief  File objects
+  public ArrayList<VDKObject> objects;
 
   /// @brief  Alliance for this .vdk file
   public Alliance alliance;
@@ -35,11 +31,7 @@ public class VDeskFormat implements Serializable {
     result += "$vdk_alliance " + alliance + "\n";
     result += this.field.save() + "\n";
 
-    for (VDKPoint p : points) {
-      result += p.save() + "\n";
-    }
-
-    for (VDKBoundingBox b : boxes) {
+    for (VDKObject b : this.objects) {
       result += "$" + b.className + " " + b.getObjectState() + "\n";
     }
 
