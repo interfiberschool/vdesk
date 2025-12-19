@@ -2,6 +2,7 @@ package xyz.beachmont.vdesk.desktop.gfx;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Polygon;
 
 /**
  * Main graphics content renderer
@@ -65,7 +66,18 @@ public class GfxContent {
    * @param y2 Corner of the box (y)
    */
   public void drawBox(int x1, int y1, int x2, int y2) {
-    this.graphics.fillRect(x1, y1, x2-x1, y2-y1);
+    int width = x2 - x1;
+    int height = y2 - y1;
+
+    if (width < 0 && height < 0) {
+      this.graphics.fillRect(x2, y2, -width, -height);
+    } if (height < 0) {
+      this.graphics.fillRect(x1, y1+height, width, -height);
+    } else if (width < 0) {
+      this.graphics.fillRect(x1+width, y1, -width, height);
+    } else {
+      this.graphics.fillRect(x1, y1, width, height);
+    }
   }
 
   /**

@@ -29,13 +29,13 @@ public class VDKRenderer implements IRenderer {
 
     // Render points first
     for (VDKPoint p : editor.activeFile.points) {
-      c.drawCircle(Color.YELLOW, (int) p.x, (int) p.y, 10);
+      c.drawCircle(Color.WHITE, (int) p.x, (int) p.y, 10);
       c.drawText(p.pointName, (int) p.x, (int) p.y);
     }
 
     // Then bounding boxes
     for (VDKBoundingBox bb : editor.activeFile.boxes) {
-      c.setColor(Color.YELLOW);
+      c.setColor(Color.CYAN);
       c.drawBox(bb.xPos, bb.yPos, bb.xCorner, bb.yCorner);
     }
   }
